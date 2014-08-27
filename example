@@ -1,0 +1,31 @@
+###Build the boot image
+. build/envsetup.sh
+lunch full_device-userdebug 
+
+###Adjust for your CPU threads
+time make bootimage -j9
+
+###Set your directory locations
+Abootimg=/NEW/cm11/target/product/device/boot.img
+Alibfiles=/NEW/cm11/target/product/device/system/lib
+Klocation=~/android/cm11/kernel/device/msm8660-common
+
+###Copy boot.img and libs
+cp -ar $Alibfiles ./output/zip/system
+cp $Abootimg ./output/zip
+
+###Go to the kernel directory and fetch the last 100 commits
+(cd $Klocation && git log --max-count=100 --oneline --decorate > changelogs.txt && sed -i 's/(HEAD, master)/" "/g' changelogs.txt && sed -i 's/\(origin\/master, origin\/HEAD\)/" "/g' changelogs.txt)
+
+###Import commits into Aroma
+cp $Klocation/changelogs.txt output/zip/META-INF/com/google/android/aroma 
+
+###Remove old files
+rm $Klocation/changelogs.txt
+
+###Naming and making an installer zip
+cd output/zip
+NOW=$(date +"%m-%d-%y")
+
+###change this name to whatever you name yours
+zip -r -q --exclude=*zip* marduks kernel-"$NOW".zip * && echo "Success" || echo "Failure"
