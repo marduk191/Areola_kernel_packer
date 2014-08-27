@@ -1,0 +1,79 @@
+##
+#
+# AROMA Installer - marduk191 Kernel
+#       (c) 2011 by Ahmad Amarullah
+#           amarullz - xda-developers
+#
+#                Version 2.51
+#
+##
+
+#ini_set("dp","3");
+
+theme("tri_flat");
+
+anisplash(
+  #-- Number of Loop
+    4,
+  
+  #-- Frame 1 [ Image, duration in millisecond ]. <AROMA Resource Dir>/splash/a[1..6].png
+    "splash/a1", 500
+);
+
+fontresload( "0", "ttf/Roboto-Regular.ttf", "12" );
+fontresload( "1", "ttf/Roboto-Regular.ttf", "18" );
+
+#Content
+
+#set vars
+ini_set("rom_name",             "Areola Kernel");
+ini_set("rom_author",           "marduk191");
+ini_set("rom_device",           "Pantech Burst");
+ini_set("rom_date",             "2014");
+
+
+viewbox(
+  "Welcome",
+    "\n\n\n\n\n"+
+    "           	You're about to flash\n"+
+    "      		"+ini_get("rom_name")+" for "+ini_get("rom_device")+"\n\n"+
+    "\n\n\n"+
+    "  AUTHOR : <#800>"+ini_get("rom_author")+"</#>\n"+
+    "  VERSION : <#080>"+ini_get("rom_version")+"</#>\n"+
+    "  UPDATED : <#008>"+ini_get("rom_date")+"</#>\n\n"+
+    "  HOMEPAGE : <#008></#>\n\n\n"+
+    "Press Next to continue the installation...",
+  "icons/info"
+);
+
+textbox(
+  "Changelog",
+  "Komodo Changelog",
+  "icons/info",
+  readfile_aroma("changelogs.txt")
+);
+
+viewbox(
+  "Ready To Install",
+  "Click -Next- to start the installation...",
+  "icons/info"
+);
+
+install(
+  "Installing",
+  "Installing Kernel...\nPlease wait until flash is complete...",
+  "icons/install"
+);
+
+# Set Next Text fo Finish
+ini_set("text_next", "Finish");
+
+viewbox(
+  "Installation Completed",
+  "<#080>Congratulation...</#>\n\n"+
+  "marduk191 Kernel has been installed\n\n"+
+  "Press Finish, and Reboot your phone.\n\n"+
+  "\n\n\n\n"+
+  ".....\n\n\nThank you",
+  "icons/info"
+);

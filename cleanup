@@ -1,0 +1,5 @@
+rm ./output/zip/*.zip
+rm ./output/zip/boot.img
+rm ./output/zip/META-INF/com/google/android/aroma/changelogs.txt
+rm -r ./output/zip/system/lib/*
+
