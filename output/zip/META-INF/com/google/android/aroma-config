@@ -10,7 +10,7 @@
 
 #ini_set("dp","3");
 
-theme("tri_flat");
+theme("ics");
 
 anisplash(
   #-- Number of Loop
